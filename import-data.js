@@ -30,9 +30,11 @@ async function main() {
   await mongoose.connect(process.env.MONGO_URI)
   console.log('Connection established')
 
-  await importJSON()
-  console.log('Import successful')
+  // await importJSON()
+  // console.log('Import successful')
   
+  //queryLocationById('63924e75df0409fce6781587')
+  queryAllLocationsByFilmName("Alice NEVERS")
   console.log('Done!')
 }
 
@@ -53,6 +55,14 @@ async function importJSON() {
     });
     location.save();
   }
+}
+
+function queryLocationById(id) {
+  Location.findById(id).then(film => console.log(film+"\n"))
+}
+function queryAllLocationsByFilmName(name) {
+  Location.find({filmName : name}).then(films => films.forEach(film => console.log(film+"\n")))
+  // console.log("\n")
 }
 
 main()
