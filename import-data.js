@@ -33,12 +33,12 @@ async function main() {
   // await importJSON()
   // console.log('Import successful\n')
   
-  //queryLocationById('63924e75df0409fce6781587')
+  //getLocationbyID('63924e75df0409fce6781587')
 
-  //queryAllLocationsByFilmName("Alice NEVERS")
+  //getLocationsByFilmName("Alice NEVERS")
 
   //deleteLocationById('63924e75df0409fce6781587')
-  //queryLocationById('63924e75df0409fce6781587')
+  //getLocationbyID('63924e75df0409fce6781587')
   
   // let updatedLocation = {
   //   filmName: "Old Old Movie!",
@@ -46,7 +46,7 @@ async function main() {
   //   year:1000
   // }
   // updateLocation('63924e77df0409fce6781f1f', updatedLocation)
-  // queryLocationById('63924e77df0409fce6781f1f')
+  // getLocationbyID('63924e77df0409fce6781f1f')
 
   // let newLocation = new Location({
   //   filmName: "I made my very own movie",
@@ -75,14 +75,14 @@ async function importJSON() {
   }
 }
 
-function queryLocationById(id) {
+function getLocationbyID(id) {
   Location.findById(id).then(film => console.log(film+"\n"))
 }
-function queryAllLocationsByFilmName(name) {
+function getLocationsByFilmName(name) {
   Location.find({filmName : name}).then(films => films.forEach(film => console.log(film+"\n")))
   // console.log("\n")
 }
-function deleteLocationById(id) {
+function deleteLocationByID(id) {
   Location.findOneAndDelete({_id:id}).then(console.log('The location was successfully deleted!\n'))
 }
 function updateLocation(id,update){
