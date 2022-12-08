@@ -78,16 +78,19 @@ async function importJSON() {
 function getLocationbyID(id) {
   Location.findById(id).then(film => console.log(film+"\n"))
 }
+
 function getLocationsByFilmName(name) {
   Location.find({filmName : name}).then(films => films.forEach(film => console.log(film+"\n")))
-  // console.log("\n")
 }
+
 function deleteLocationByID(id) {
   Location.findOneAndDelete({_id:id}).then(console.log('The location was successfully deleted!\n'))
 }
+
 function updateLocation(id,update){
   Location.updateOne({_id: id}, {$set:update}).then(console.log('The location was successfully updated'))
 }
+
 function addLocation(location) {
   try{
       location.save();
