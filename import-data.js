@@ -26,16 +26,34 @@ const filmingLocations = require('./lieux-de-tournage-a-paris.json')
 
 async function main() {
 
-  console.log('Trying to connect to database')
+  console.log('Trying to connect to database\n')
   await mongoose.connect(process.env.MONGO_URI)
-  console.log('Connection established')
+  console.log('Connection established\n')
 
   // await importJSON()
-  // console.log('Import successful')
+  // console.log('Import successful\n')
   
   //queryLocationById('63924e75df0409fce6781587')
-  queryAllLocationsByFilmName("Alice NEVERS")
-  console.log('Done!')
+
+  //queryAllLocationsByFilmName("Alice NEVERS")
+
+  //deleteLocationById('63924e75df0409fce6781587')
+  //queryLocationById('63924e75df0409fce6781587')
+  
+  // let updatedLocation = {
+  //   filmName: "Old Old Movie!",
+  //   address: "ESILV",
+  //   year:1000
+  // }
+  // updateLocation('63924e77df0409fce6781f1f', updatedLocation)
+  // queryLocationById('63924e77df0409fce6781f1f')
+
+  // let newLocation = new Location({
+  //   filmName: "I made my very own movie",
+  //   address: "Somewhere in the north pole",
+  //   year: 0
+  // })
+  // addLocation(newLocation)
 }
 
 async function importJSON() {
@@ -63,6 +81,20 @@ function queryLocationById(id) {
 function queryAllLocationsByFilmName(name) {
   Location.find({filmName : name}).then(films => films.forEach(film => console.log(film+"\n")))
   // console.log("\n")
+}
+function deleteLocationById(id) {
+  Location.findOneAndDelete({_id:id}).then(console.log('The location was successfully deleted!\n'))
+}
+function updateLocation(id,update){
+  Location.updateOne({_id: id}, {$set:update}).then(console.log('The location was successfully updated'))
+}
+function addLocation(location) {
+  try{
+      location.save();
+      console.log("The location was successfully added\n")
+  } catch (e) {
+      console.log("Error : the location couldn't be added\n")
+  }
 }
 
 main()
